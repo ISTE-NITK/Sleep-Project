@@ -1,6 +1,8 @@
 
 import smbus
 import time
+import numpy as np
+
 bus = smbus.SMBus(1)
 # I2C address 0x29
 # Register 0x12 has device ver. 
@@ -20,7 +22,11 @@ if ver == 0x44:
   green = data[5] << 8 | data[4]
   blue = data[7] << 8 | data[6]
   crgb = "C: %s, R: %s, G: %s, B: %s\n" % (clear, red, green, blue)
+  crgb_array= np.array([clear, red, green, blue])
+  f=open('csv_data.dat','ab')
+  np.savetxt(f, crgb_array)
   print crgb
-  time.sleep(1)
+  f.close()
+  time.sleep(10)
 else: 
  print "Device not found\n"
