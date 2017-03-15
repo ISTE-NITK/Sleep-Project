@@ -3,6 +3,9 @@ import smbus
 import time
 import numpy as np
 
+import datetime
+import pytz
+
 #SDA GPIO P3
 #SCL GPIO P5
 bus = smbus.SMBus(1)
@@ -27,6 +30,9 @@ if ver == 0x44:
   crgb_array= np.array([clear, red, green, blue])
   f=open('csv_data.dat','ab')
   np.savetxt(f, crgb_array)
+  utc_time = datetime.datetime.now(pytz.utc)
+  local_time = (utc_time.astimezone(pytz.timezone('Asia/Calcutta')))
+  f.write(str(local_time))
   print crgb
   f.close()
   time.sleep(10)
