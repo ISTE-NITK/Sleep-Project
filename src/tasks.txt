@@ -1,0 +1,5 @@
+1. Merge tcs.py and AirQuality.py - Shashank, Vilohit
+2. Post merge, run convert to csv - Radhika 
+3. Analyze the tcs output file, intensity of rgb? -Raveesh
+
+
