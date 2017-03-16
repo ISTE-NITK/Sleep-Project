@@ -2,12 +2,18 @@
 import smbus
 import time
 import numpy as np
+import serial
 
 import datetime
 import pytz
 
+#Arduino RX 0 -> RPi 14 
+#Arduino TX 1 -> RPi 15
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=0)
+
 #SDA GPIO P3
 #SCL GPIO P5
+
 bus = smbus.SMBus(1)
 # I2C address 0x29
 # Register 0x12 has device ver. 
@@ -15,6 +21,7 @@ bus = smbus.SMBus(1)
 bus.write_byte(0x29,0x80|0x12)
 ver = bus.read_byte(0x29)
 # version # should be 0x44
+
 if ver == 0x44:
  print "Device found\n"
  bus.write_byte(0x29, 0x80|0x00) # 0x00 = ENABLE register
@@ -29,6 +36,16 @@ if ver == 0x44:
   crgb = "C: %s, R: %s, G: %s, B: %s\n" % (clear, red, green, blue)
   crgb_array= np.array([clear, red, green, blue])
   f=open('csv_data.dat','ab')
+  
+  try:
+        value = ser.readline().decode('utf-8')
+        if value:  # If it isn't a blank line
+            f.write(value)
+   except ser.SerialTimeoutException:
+        print('Data could not be read')
+  
+
+  
   np.savetxt(f, crgb_array)
   utc_time = datetime.datetime.now(pytz.utc)
   local_time = (utc_time.astimezone(pytz.timezone('Asia/Calcutta')))
