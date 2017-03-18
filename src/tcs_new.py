@@ -34,8 +34,8 @@ if ver == 0x44:
   green = data[5] << 8 | data[4]
   blue = data[7] << 8 | data[6]
   crgb = "C: %s, R: %s, G: %s, B: %s\n" % (clear, red, green, blue)
-#Converts raw r/g/b values to luminosity in lux
-illuminance=(-0.32466*r)+(1.57837*g)+(-0.73191*b)
+  #Converts raw r/g/b values to luminosity in lux
+  illuminance=(-0.32466*r)+(1.57837*g)+(-0.73191*b)
   crgb_array= np.array([clear, red, green, blue,illuminance])
   f=open('csv_data.dat','ab')
   value = ser.readline().decode('utf-8')
