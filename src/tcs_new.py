@@ -27,6 +27,9 @@ if ver == 0x44:
  bus.write_byte(0x29, 0x80|0x00) # 0x00 = ENABLE register
  bus.write_byte(0x29, 0x01|0x02) # 0x01 = Power on, 0x02 RGB sensors enabled
  bus.write_byte(0x29, 0x80|0x14) # Reading results start register 14, LSB then MSB
+ f=open('csv_data.csv', 'ab')
+ f.write("airquality, clear, red, green, blue, illuminance, timestamp\n")
+ f.close()
  while True:
   data = bus.read_i2c_block_data(0x29, 0)
   clear = clear = data[1] << 8 | data[0]
@@ -34,13 +37,13 @@ if ver == 0x44:
   green = data[5] << 8 | data[4]
   blue = data[7] << 8 | data[6]
   illuminance=(-0.32466*red)+(1.57837*green)+(-0.73191*blue)
-  crgbi = "C: %s, R: %s, G: %s, B: %s, I: %s," % (clear, red, green, blue,illuminance)
+  crgbi = "%s, %s, %s, %s, %s, " % (clear, red, green, blue,illuminance)
   #Converts raw r/g/b values to luminosity in lux
-  crgb_array= np.array([clear, red, green, blue, illuminance])
-  f=open('csv_data.dat','ab')
+  #crgb_array= np.array([clear, red, green, blue, illuminance])
+  f=open('csv_data.csv','ab')
   value = ser.readline().decode('utf-8')
   if value:  # If it isn't a blank line
-  	f.write(value + ",")
+  	f.write(value.rstrip() + ", ")
 	
   #except ser.SerialTimeoutException:
         #print('Data could not be read')
@@ -48,12 +51,12 @@ if ver == 0x44:
 
   
   #np.savetxt(f, crgb_array)
-  f.write(crgbi + ",")
+  f.write(crgbi)
   utc_time = datetime.datetime.now(pytz.utc)
   local_time = (utc_time.astimezone(pytz.timezone('Asia/Calcutta')))
   f.write(str(local_time))
-  f.write("\n\n")
-  print crgb
+  f.write("\n")
+  print crgbi
   f.close()
 
   time.sleep(10)
