@@ -33,29 +33,30 @@ if ver == 0x44:
   red = data[3] << 8 | data[2]
   green = data[5] << 8 | data[4]
   blue = data[7] << 8 | data[6]
-  crgb = "C: %s, R: %s, G: %s, B: %s\n" % (clear, red, green, blue)
-  #Converts raw r/g/b values to luminosity in lux
   illuminance=(-0.32466*red)+(1.57837*green)+(-0.73191*blue)
-  crgb_array= np.array([clear, red, green, blue,illuminance])
+  crgbi = "C: %s, R: %s, G: %s, B: %s, I: %s," % (clear, red, green, blue,illuminance)
+  #Converts raw r/g/b values to luminosity in lux
+  crgb_array= np.array([clear, red, green, blue, illuminance])
   f=open('csv_data.dat','ab')
   value = ser.readline().decode('utf-8')
   if value:  # If it isn't a blank line
-  	f.write(value)
+  	f.write(value + ",")
 	
   #except ser.SerialTimeoutException:
         #print('Data could not be read')
   
 
   
-  np.savetxt(f, crgb_array)
+  #np.savetxt(f, crgb_array)
+  f.write(crgbi + ",")
   utc_time = datetime.datetime.now(pytz.utc)
   local_time = (utc_time.astimezone(pytz.timezone('Asia/Calcutta')))
   f.write(str(local_time))
   f.write("\n\n")
   print crgb
   f.close()
-  #ser.close()
+
   time.sleep(10)
-  #ser.open()
+ 
 else: 
  print "Device not found\n"

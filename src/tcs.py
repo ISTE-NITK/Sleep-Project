@@ -52,6 +52,7 @@ if ver == 0x44:
   f.write(str(local_time))
   print crgb
   f.close()
+  ser.close()
   time.sleep(10)
 else: 
  print "Device not found\n"
