@@ -1,0 +1,274 @@
+
+\documentclass[final]{beamer}
+
+\usepackage[scale=1.24]{beamerposter} % Use the beamerposter package for laying out the poster
+
+\usetheme{confposter} % Use the confposter theme supplied with this template
+
+\setbeamercolor{block title}{fg=ngreen,bg=white} % Colors of the block titles
+\setbeamercolor{block body}{fg=black,bg=white} % Colors of the body of blocks
+\setbeamercolor{block alerted title}{fg=white,bg=dblue!70} % Colors of the highlighted block titles
+\setbeamercolor{block alerted body}{fg=black,bg=dblue!10} % Colors of the body of highlighted blocks
+% Many more colors are available for use in beamerthemeconfposter.sty
+
+%-----------------------------------------------------------
+% Define the column widths and overall poster size
+% To set effective sepwid, onecolwid and twocolwid values, first choose how many columns you want and how much separation you want between columns
+% In this template, the separation width chosen is 0.024 of the paper width and a 4-column layout
+% onecolwid should therefore be (1-(# of columns+1)*sepwid)/# of columns e.g. (1-(4+1)*0.024)/4 = 0.22
+% Set twocolwid to be (2*onecolwid)+sepwid = 0.464
+% Set threecolwid to be (3*onecolwid)+2*sepwid = 0.708
+
+\newlength{\sepwid}
+\newlength{\onecolwid}
+\newlength{\twocolwid}
+\newlength{\threecolwid}
+\setlength{\paperwidth}{48in} % A0 width: 46.8in
+\setlength{\paperheight}{36in} % A0 height: 33.1in
+\setlength{\sepwid}{0.024\paperwidth} % Separation width (white space) between columns
+\setlength{\onecolwid}{0.22\paperwidth} % Width of one column
+\setlength{\twocolwid}{0.464\paperwidth} % Width of two columns
+\setlength{\threecolwid}{0.708\paperwidth} % Width of three columns
+\setlength{\topmargin}{-0.5in} % Reduce the top margin size
+%-----------------------------------------------------------
+
+\usepackage{graphicx}  % Required for including images
+
+\usepackage{booktabs} % Top and bottom rules for tables
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION 
+%----------------------------------------------------------------------------------------
+
+\title{Indoor Positioning System using BLE Beacons} % Poster title
+
+\author{Authors: Ajin Tom, Aniket Rege, Abhishek Shanthkumar\\[3mm]Contributors: Prateek Wadhwani, Manisha Jhawar, Ashritha Kandiraju, Snehal Jauhri} % Author(s)
+
+\institute{National Institute of Techology Karnataka, Surathkal} % Institution(s)
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\addtobeamertemplate{headline}{} 
+{
+\begin{tikzpicture}[remember picture,overlay] 
+\node [anchor=north west, inner sep=3cm]  at (current page.north west)
+     {\includegraphics[height=8cm]{NITK.png}};
+\end{tikzpicture}
+\begin{tikzpicture}[remember picture,overlay] 
+\node [shift={(-10 cm,-7cm)}] at (current page.north east) {\includegraphics[height=8cm]{iste.png}}; 
+\end{tikzpicture} 
+}
+
+\addtobeamertemplate{block end}{}{\vspace*{2ex}} % White space under blocks
+\addtobeamertemplate{block alerted end}{}{\vspace*{2ex}} % White space under highlighted (alert) blocks
+
+\setlength{\belowcaptionskip}{2ex} % White space under figures
+\setlength\belowdisplayshortskip{2ex} % White space under equations
+
+\begin{frame}[t] % The whole poster is enclosed in one beamer frame
+
+\begin{columns}[t] % The whole poster consists of three major columns, the second of which is split into two columns twice - the [t] option aligns each column's content to the top
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\onecolwid} % The first column
+
+%----------------------------------------------------------------------------------------
+%	OBJECTIVES
+%----------------------------------------------------------------------------------------
+
+\begin{alertblock}{Objectives}
+The major objective of the project was to create an indoor positioning system (IPS) to locate people inside a building infrastructure using sensory information collected by mobile devices, specifically by measuring distances to nearby Bluetooth anchor nodes using Bluetooth Low Energy (BLE) technology, and dynamically displaying the location in a GUI. This can be extended to applications in:
+\begin{itemize}
+\item Indoor Positioning/Navigation
+\item Mobile Tracking
+\item Location Sharing
+\item Proximity Notifications 
+\item Contextualized Information
+\item Real-Time Messaging
+\end{itemize}
+
+\end{alertblock}
+
+%----------------------------------------------------------------------------------------
+%	MOTIVATION
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Motivation}
+\textbf {BLE vs. GPS for IPS} 
+\\
+GPS technology is generally used for tracking objects through satellites in lower Earth orbit. It is accurate to a distance of 5-10 meters.In an indoor environment, this level of accuracy is not usable. Hence we use BLE nodes and a trilateration algorithm to obtain an accuracy suitable for these dimensions.
+\end{block}
+
+
+%------------------------------------------------
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{block.png}
+\caption{Flow Chart for working of the IPS}
+\end{figure}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of the first column
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\twocolwid} % Begin a column which is two columns wide (column 2)
+
+\begin{columns}[t,totalwidth=\twocolwid] % Split up the two columns wide column
+
+\begin{column}{\onecolwid}\vspace{-.6in} % The first column within column 2 (column 2.1)
+
+%----------------------------------------------------------------------------------------
+%	MATERIALS
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Design and Methodology}
+
+The various modules that make up this project are as follows: 
+
+\begin{itemize}
+\item An \textbf {Android App} to display a list of available BLE nodes in the area, along with their signal strengths at a particular point in the form of RSSI values (Received Signal Strength Indication). These values are dynamically pushed to the server via the HTTP POST method.
+\item A \textbf {Server built in Flask}, hosted on a \textbf{Raspberry-Pi} to dynamically receive and process data sent from the app, and send it for further processing. 
+\item A \textbf {Trilateration Algorithm} to calculate location of a host phone in the building environment based on its RSSI values.
+\item A \textbf {Graphcal User Interface (GUI)} built with the Python Curses library to display location of the host phone in realtime using x and y coordinates from the above algorithm.
+\end{itemize}
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of column 2.1
+
+\begin{column}{\onecolwid}\vspace{-.6in} % The second column within column 2 (column 2.2)
+
+%----------------------------------------------------------------------------------------
+%	P
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Hardware Setup}
+The HM-10 modules are to be set up in the corners of a room, and extended through the indoor environment. They are to be configured to behave as broadcast beacons \textbf{(iBeacon standard)} using a serial adapter to connect to a PC, and the Arduino serial monitor for configuration using the AT command set. The modules operate on a supply voltage of 3.3 volts, and draw an average of 180 mA of current. Once powered, each broadcasts its own \textbf{UUID} up to a range of 10 meters. \\After this initial setup, a local server must also be set up to process the data received from each host. The server can be hosted locally on a PC, or online through a dedicated portal. Once the server setup is complete, the application is ready for phone hosts. The host phones must have Bluetooth enabled, and the ISTE BLE app installed. On walking through the environment, the location of the phone is \textbf{dynamically displayed and updated on the GUI}, after processing to calculate position on the server side.
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of column 2.2
+
+\end{columns} % End of the split of column 2 - any content after this will now take up 2 columns width
+
+%----------------------------------------------------------------------------------------
+%	IMPORTANT To REMEMBER
+%----------------------------------------------------------------------------------------
+
+\begin{alertblock}{Important Result }
+
+The RSSI values from a particular phone host is encoded as a string in the format Host,value1,value2,value3; and processed as a \textbf{JSON object.} JSON, or JavaScript Object Notation, is a human readable text format used for easy parsing and secure data transfer for asynchronous browser/server communication. It is essential to our implementation.
+
+\end{alertblock} 
+
+%----------------------------------------------------------------------------------------
+
+\begin{columns}[t,totalwidth=\twocolwid] % Split up the two columns wide column again
+
+\begin{column}{\onecolwid} % The first column within column 2 (column 2.1)
+
+%----------------------------------------------------------------------------------------
+%	EXAMPLE OF FACTORISATION
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Components}
+The main components of the IPS are as shown in figure 1. They are listed as:
+
+\begin{enumerate}
+\item Host Phone (Client)
+\item Flask Server 
+\item Trilateration Algorithm
+\item Curses GUI 
+\end{enumerate}
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of column 2.1
+
+\begin{column}{\onecolwid} % The second column within column 2 (column 2.2)
+
+%----------------------------------------------------------------------------------------
+%	PROOF OF VIETA'S FORMULAS
+%----------------------------------------------------------------------------------------
+
+\begin{block}{ iBeacon Standard}
+A Beacon is identified by three parameters: its UUID, as well as \textbf{ Major and Minor} values.
+Major values are intended to identify and distinguish a group â€“ for example all beacons in on a certain floor will have a single major value.
+Minor values are intended to identify and distinguish an individual â€“ that is, for a particular node.
+All these parameters are displayed in a list format in the app.
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of column 2.2
+
+\end{columns} % End of the split of column 2
+
+\end{column} % End of the second column
+
+\begin{column}{\sepwid}\end{column} % Empty spacer column
+
+\begin{column}{\onecolwid} % The third column
+
+%----------------------------------------------------------------------------------------
+%	CONCLUSION
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Trilateration Algorithm}
+  The RSSI values received from the beacons are used by the \textbf {Trilateration algorithm}for distance estimation between the beacons and mobile device. By using this method one considers three or more beacons allocated in the building. The signal strengths of these beacons decrease exponentially depending on the distance between transmitter and receiver. Thus this dependency can be considered as function of distance. The distance estimated by signal strength is presented as a \textbf{circle with a radius around the beacon}. The intersection of the three beacons' radii provides a point or an area of receiver. For highly accurate location estimation, larger number of nodes (6-8) are required.
+
+\end{block}
+
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\setbeamercolor{block title}{fg=red,bg=white} % Change the block title color
+
+\begin{block}{References and Resources}
+
+\nocite{*} % Insert publications even if they are not cited in the poster
+\begin{itemize}
+\item http://www.blueluminance.com/HM-10-as-iBeacon.pdf, Beacon Configuration
+\item http://flask.pocoo.org/docs/0.10/, Flask Documentation
+\item https://docs.python.org/2/howto/curses.html, Curses GUI Documentation
+\end{itemize}
+
+\end{block}
+
+\setbeamercolor{block alerted title}{fg=black,bg=norange} % Change the alert block title colors
+\setbeamercolor{block alerted body}{fg=black,bg=white} % Change the alert block body colors
+
+\begin{alertblock}{Conclusion and Results}
+We made the following observations in the course of this project:
+\begin{itemize}
+\item The application proved efficient and accurate as an Indoor Positioning System
+\item Flask is an excellent and versatile framework for establishing client-server connection
+\item Data sent as JSON objects is easy to parse and secure in transmission 
+\item GUI can be extended to an aesthetically improved and dimensionally correct version using Ionic and AngularJS 
+\end{itemize}
+
+\end{alertblock}
+
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of the third column
+
+\end{columns} % End of all the columns in the poster
+
+\end{frame} % End of the enclosing frame
+
+\end{document}
