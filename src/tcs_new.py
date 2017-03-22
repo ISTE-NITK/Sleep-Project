@@ -44,10 +44,19 @@ if ver == 0x44:
   
   f=open('csv_data.csv','ab')
 
-  value = ser.readline().decode('utf-8')
-  if value:  # If it isn't a blank line
-  	f.write(value.rstrip() + ", ")
-	#strip newline from Arduino 
+  quality = ser.readline().decode('utf-8')
+  if quality:  # If it isn't a blank line
+  	f.write(quality.rstrip() + ", ")
+
+  celsius = ser.readline().decode('utf-8')
+  if celsius:  # If it isn't a blank line
+    f.write(temp.rstrip() + ", ")  
+	  
+  humid = ser.readline().decode('utf-8')
+  if humid:  # If it isn't a blank line
+    f.write(humid.rstrip() + ", ")
+  #strip newline from Arduino 
+  
   f.write(crgbi)
   utc_time = datetime.datetime.now(pytz.utc)
   local_time = (utc_time.astimezone(pytz.timezone('Asia/Calcutta')))
