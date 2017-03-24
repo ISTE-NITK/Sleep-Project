@@ -28,7 +28,7 @@ if ver == 0x44:
  bus.write_byte(0x29, 0x80|0x14) # Reading results start register 14, LSB then MSB
  
  f=open('csv_data.csv', 'ab')
- f.write("airquality, clear, red, green, blue, illuminance, timestamp\n")
+ f.write("airquality, temperature, humidity, clear, red, green, blue, illuminance, timestamp\n")
  f.close() #Columns of CSV file (sensor readings + timestamp)
  
  while True:
@@ -50,7 +50,7 @@ if ver == 0x44:
 
   celsius = ser.readline().decode('utf-8')
   if celsius:  # If it isn't a blank line
-    f.write(temp.rstrip() + ", ")  
+    f.write(celsius.rstrip() + ", ")  
 	  
   humid = ser.readline().decode('utf-8')
   if humid:  # If it isn't a blank line
