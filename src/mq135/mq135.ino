@@ -2,7 +2,7 @@
 #include <dht.h>      //Temperature and Humidity Sensor: http://www.circuitbasics.com/wp-content/uploads/2015/10/DHTLib.zip
 
 #define AIRQUALITYPIN A0
-#define DHT11_PIN 2
+#define DHT11_PIN 3
 
 dht DHT;
 MQ135 gasSensor = MQ135(AIRQUALITYPIN);
