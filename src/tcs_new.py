@@ -22,7 +22,15 @@ ver = bus.read_byte(0x29)
 
 # version # should be 0x44
 if ver == 0x44:
- print "Device found\n"
+ print "***************************************************************************************"
+ print "***************************************************************************************"
+ print "                                                                                       "
+ print "                            SLEEP RECORDING INITIATED                                  "
+ print "                                                                                       "
+ print "***************************************************************************************"
+ print "***************************************************************************************"
+ 
+
  bus.write_byte(0x29, 0x80|0x00) # 0x00 = ENABLE register
  bus.write_byte(0x29, 0x01|0x02) # 0x01 = Power on, 0x02 RGB sensors enabled
  bus.write_byte(0x29, 0x80|0x14) # Reading results start register 14, LSB then MSB
@@ -40,7 +48,7 @@ if ver == 0x44:
   illuminance=(-0.32466*red)+(1.57837*green)+(-0.73191*blue)
   #Converts raw r/g/b values to luminosity in lux
   
-  crgbi = "%s, %s, %s, %s, %s, " % (clear, red, green, blue,illuminance)
+  crgbi = "%s, %s, %s, %s, %s, " % (clear, red, green, blue, illuminance)
   
   f=open('csv_data.csv','ab')
 
