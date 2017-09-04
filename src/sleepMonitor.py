@@ -50,7 +50,7 @@ if ver == 0x44:
   
   crgbi = "%s, %s, %s, %s, %s, " % (clear, red, green, blue, illuminance)
   
-  f=open('csv_data.csv','ab')
+  f=open('/home/pi/istesleep/src/csv_data.csv','ab')
 
   quality = ser.readline().decode('utf-8')
   if quality:  # If it isn't a blank line
