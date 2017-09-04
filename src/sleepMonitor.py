@@ -8,7 +8,7 @@ import pytz
 
 #Arduino RX 0 -> RPi 14 
 #Arduino TX 1 -> RPi 15
-ser = serial.Serial('/dev/ttyACM0', 9600, timeout=0)
+ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=0)
 
 #SDA GPIO P3
 #SCL GPIO P5
