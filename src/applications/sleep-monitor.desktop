@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Icon=/usr/share/pixmaps/sleepicon.png
+Name=Sleep Monitor
+GenericName=IoT Sleep Hygiene Monitor
+Comment=Monitor your Sleep
+Encoding=UTF-8
+Terminal=true
+Exec=/home/pi/istesleep/src/sleepMonitor.sh
+Type=Application
+Categories=Application;Electronics;
