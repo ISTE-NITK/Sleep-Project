@@ -29,13 +29,18 @@ if ver == 0x44:
  print "                                                                                       "
  print "********************************************************************************"
  print "********************************************************************************"
- 
-
+ print " "
+ print " "
+ print " "
+ time.sleep(10)
+ print "Hit Ctrl+C to exit application."
+  
+	
  bus.write_byte(0x29, 0x80|0x00) # 0x00 = ENABLE register
  bus.write_byte(0x29, 0x01|0x02) # 0x01 = Power on, 0x02 RGB sensors enabled
  bus.write_byte(0x29, 0x80|0x14) # Reading results start register 14, LSB then MSB
  
- f=open('csv_data.csv', 'ab')
+ f=open('/home/pi/istesleep/src/csv_data.csv', 'ab')
  f.write("airquality, temperature, humidity, clear, red, green, blue, illuminance, timestamp\n")
  f.close() #Columns of CSV file (sensor readings + timestamp)
  
@@ -55,10 +60,14 @@ if ver == 0x44:
   quality = ser.readline().decode('utf-8')
   if quality:  # If it isn't a blank line
   	f.write(quality.rstrip() + ", ")
+  else:
+ 	print "Error: Check Air Quality Sensor Connections.\n"
 
   celsius = ser.readline().decode('utf-8')
   if celsius:  # If it isn't a blank line
     f.write(celsius.rstrip() + ", ")  
+  else:
+    print "Error: Check Temperature & Humidity Sensor Connections.\n"
 	  
   humid = ser.readline().decode('utf-8')
   if humid:  # If it isn't a blank line
@@ -70,11 +79,11 @@ if ver == 0x44:
   local_time = (utc_time.astimezone(pytz.timezone('Asia/Calcutta')))
   f.write(str(local_time))
   f.write("\n")
-  print "Data Stored!"
+  #print "Data Stored!"
   f.close()
 
   time.sleep(10) 
   #sampling time between readings 
  
 else: 
- print "Device not found\n"
+ print "Error: Light Sensor not found\n"
