@@ -9,4 +9,4 @@
 
 Sleep Quality Measurements : Range from 60-70 (Purple - Yellow)
 
-![Data_50_above](Data_50_above.png)
+![Data_50_above](sleepAnalytics/Data_50_above.png)
