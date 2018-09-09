@@ -17,7 +17,7 @@ Sleep Quality Measurements : Range from 68-77 (Purple - Yellow)
 * Night Measurements
 ![Data_50_above](sleepAnalytics/Data_dark.png)
 * Sleep Quality vs. Air Quality
-![S](sleepAnalytics/Sleep Quality\ vs.\ Air\ Quality.jpg)
+![S](sleepAnalytics/Sleep Quality&#32vs.&#32Air&#32Quality.jpg)
 * Sleep Quality based on: Steps VS Minutes
 ![StepsvMinutes](sleepAnalytics/StepsvMinutes.jpg)
 
